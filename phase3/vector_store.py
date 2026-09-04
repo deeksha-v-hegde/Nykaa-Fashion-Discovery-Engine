@@ -158,6 +158,27 @@ class VectorStore:
         """, (model_name,))
 
         rows = cursor.fetchall()
+
+        # Automatic fallback: If requested model_name yields 0 rows, check actual embedding model indexed in DB
+        if not rows:
+            cursor.execute("SELECT cv.embedding_model FROM chunk_vectors cv LIMIT 1")
+            existing_row = cursor.fetchone()
+            if existing_row and existing_row[0]:
+                actual_model = existing_row[0]
+                cursor.execute("""
+                    SELECT 
+                        cv.chunk_id, cv.document_id, cv.vector, cv.dim, cv.embedding_model,
+                        cv.source_scope, cv.source_id, cv.source_type, cv.published_at, cv.token_count,
+                        c.text, d.url, d.raw_text, s.name as source_name, s.platform
+                    FROM chunk_vectors cv
+                    JOIN chunks c ON cv.chunk_id = c.chunk_id
+                    JOIN documents d ON cv.document_id = d.document_id
+                    JOIN sources s ON cv.source_id = s.source_id
+                    WHERE cv.embedding_model = ? AND d.relevance = 'relevant'
+                """, (actual_model,))
+                rows = cursor.fetchall()
+                model_name = actual_model
+
         conn.close()
 
         if not rows:

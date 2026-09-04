@@ -38,7 +38,7 @@ class VectorRetriever:
 
     def __init__(self, embedding_model: Optional[str] = None):
         settings = Settings()
-        self.embedding_model = embedding_model or settings.embedding_model or "tfidf-lsa-384"
+        self.embedding_model = embedding_model or settings.embedding_model or "text-embedding-3-small"
         self.default_strategy = settings.retrieval_strategy  # "vector" or "hybrid"
         self.default_top_k = settings.retrieval_top_k
         self.embedder = TextEmbedder(model_name=self.embedding_model)

@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     groq_model: Optional[str] = Field(default=None, alias="GROQ_MODEL")
 
     # Embeddings & Vector Store
-    embedding_model: Optional[str] = Field(default=None, alias="EMBEDDING_MODEL")
+    embedding_model: Optional[str] = Field(default="text-embedding-3-small", alias="EMBEDDING_MODEL")
     vector_db_url: Optional[str] = Field(default="sqlite:///./data/discovery_engine.db", alias="VECTOR_DB_URL")
 
     # Retrieval Strategy
