@@ -44,11 +44,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Modern SaaS AI / Product Intelligence Design System
+# Centralized SaaS Design System & CSS Architecture
 st.markdown("""
 <style>
-    /* Google Fonts import */
+    /* Google Fonts Import */
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    /* Design Tokens / CSS Variables */
+    :root {
+        --primary: #FF2A85;
+        --primary-hover: #E01E73;
+        --secondary: #38BDF8;
+        --bg-main: #080C14;
+        --bg-surface: #0F1626;
+        --bg-surface-elevated: #151F33;
+        --bg-sidebar: #0D121D;
+        --text-primary: #FFFFFF;
+        --text-secondary: #CBD5E1;
+        --text-muted: #94A3B8;
+        --border-subtle: rgba(255, 255, 255, 0.08);
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --info: #38BDF8;
+    }
 
     /* Global Layout Reset & Box Sizing */
     *, *::before, *::after {
@@ -65,8 +84,8 @@ st.markdown("""
     
     /* Main Background & SaaS Typography */
     .main, .stApp {
-        background-color: #080C14 !important;
-        color: #E2E8F0 !important;
+        background-color: var(--bg-main) !important;
+        color: var(--text-secondary) !important;
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
         letter-spacing: -0.01em !important;
     }
@@ -75,7 +94,7 @@ st.markdown("""
     h1, h1 *, div[data-testid="stMarkdownContainer"] h1 {
         font-size: 22px !important;
         font-weight: 800 !important;
-        color: #FFFFFF !important;
+        color: var(--text-primary) !important;
         letter-spacing: -0.03em !important;
         margin-bottom: 0.25rem !important;
     }
@@ -101,8 +120,8 @@ st.markdown("""
 
     /* Modern Narrow Left Sidebar */
     section[data-testid="stSidebar"] {
-        background-color: #0D121D !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+        background-color: var(--bg-sidebar) !important;
+        border-right: 1px solid var(--border-subtle) !important;
         width: 270px !important;
         min-width: 270px !important;
         max-width: 270px !important;
@@ -112,7 +131,7 @@ st.markdown("""
         padding: 1.25rem 1rem !important;
     }
 
-    /* Sidebar Navigation Radio Options */
+    /* Sidebar Navigation Options */
     div[data-testid="stRadio"] {
         width: 100% !important;
     }
@@ -129,7 +148,7 @@ st.markdown("""
         transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     div[data-testid="stRadio"] label:hover {
-        border-color: #FF2A85 !important;
+        border-color: var(--primary) !important;
         background-color: #1A2234 !important;
         transform: translateX(2px) !important;
     }
@@ -145,8 +164,8 @@ st.markdown("""
 
     /* Top Metric / KPI Cards */
     .saas-kpi-card {
-        background: #0F1626;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 12px;
         padding: 16px 20px;
         display: flex;
@@ -163,14 +182,14 @@ st.markdown("""
     .saas-kpi-val {
         font-size: 28px !important;
         font-weight: 800 !important;
-        color: #38BDF8 !important;
+        color: var(--secondary) !important;
         line-height: 1.1 !important;
         letter-spacing: -0.03em;
     }
     .saas-kpi-lbl {
         font-size: 11px !important;
         font-weight: 700 !important;
-        color: #94A3B8 !important;
+        color: var(--text-muted) !important;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         margin-top: 5px;
@@ -185,7 +204,7 @@ st.markdown("""
         cursor: default;
     }
     .kpi-interactive-card:hover {
-        border-color: #38BDF8 !important;
+        border-color: var(--secondary) !important;
         box-shadow: 0 6px 24px rgba(56, 189, 248, 0.12) !important;
     }
     .kpi-hover-popover {
@@ -221,12 +240,12 @@ st.markdown("""
     .popover-header {
         font-size: 10px;
         font-weight: 800;
-        color: #94A3B8;
+        color: var(--text-muted);
         letter-spacing: 0.8px;
         text-transform: uppercase;
         margin-bottom: 9px;
         padding-bottom: 6px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid var(--border-subtle);
     }
     .popover-row {
         display: flex;
@@ -236,11 +255,11 @@ st.markdown("""
         font-size: 12.5px;
     }
     .popover-name {
-        color: #CBD5E1;
+        color: var(--text-secondary);
         font-weight: 500;
     }
     .popover-val {
-        color: #38BDF8;
+        color: var(--secondary);
         font-weight: 700;
         font-variant-numeric: tabular-nums;
     }
@@ -252,23 +271,23 @@ st.markdown("""
     }
     .popover-divider {
         height: 1px;
-        background: rgba(255, 255, 255, 0.08);
+        background: var(--border-subtle);
         margin: 8px 0 7px 0;
     }
     .popover-total-name {
-        color: #FFFFFF;
+        color: var(--text-primary);
         font-weight: 700;
     }
     .popover-total-val {
-        color: #10B981;
+        color: var(--success);
         font-weight: 800;
         font-variant-numeric: tabular-nums;
     }
 
     /* Friction Signal Cards */
     .saas-friction-card {
-        background: #0F1626;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 12px;
         padding: 16px 18px;
         display: flex;
@@ -294,7 +313,7 @@ st.markdown("""
         font-weight: 800;
         padding: 2px 8px;
         border-radius: 6px;
-        background: #FF2A85;
+        background: var(--primary);
         color: #FFFFFF;
         text-transform: uppercase;
         letter-spacing: 0.03em;
@@ -304,7 +323,7 @@ st.markdown("""
         font-weight: 800;
         padding: 2px 8px;
         border-radius: 6px;
-        background: #38BDF8;
+        background: var(--secondary);
         color: #080C14;
         text-transform: uppercase;
         letter-spacing: 0.03em;
@@ -315,28 +334,28 @@ st.markdown("""
         padding: 2px 7px;
         border-radius: 6px;
         background: #1E293B;
-        color: #10B981;
+        color: var(--success);
         text-transform: uppercase;
         letter-spacing: 0.04em;
     }
     .friction-title {
         font-size: 14.5px !important;
         font-weight: 700 !important;
-        color: #FFFFFF !important;
+        color: var(--text-primary) !important;
         line-height: 1.4 !important;
         margin-bottom: 12px !important;
         min-height: 40px;
     }
     .friction-meta-row {
         font-size: 12px;
-        color: #94A3B8;
+        color: var(--text-muted);
         margin-bottom: 4px;
         display: flex;
         align-items: center;
         gap: 6px;
     }
     .friction-meta-accent {
-        color: #F59E0B;
+        color: var(--warning);
         font-weight: 700;
     }
     .friction-score-row {
@@ -349,20 +368,20 @@ st.markdown("""
     }
     .friction-score-lbl {
         font-size: 11px;
-        color: #94A3B8;
+        color: var(--text-muted);
         font-weight: 700;
         text-transform: uppercase;
     }
     .friction-score-num {
         font-size: 15px;
         font-weight: 800;
-        color: #10B981;
+        color: var(--success);
     }
 
     /* Experiment / Hypothesis Cards */
     .saas-hypo-card {
-        background: #0F1626;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 12px;
         padding: 16px 18px;
         display: flex;
@@ -397,19 +416,19 @@ st.markdown("""
         padding: 2px 7px;
         border-radius: 6px;
         background: #1E293B;
-        color: #38BDF8;
+        color: var(--secondary);
         text-transform: uppercase;
     }
     .hypo-intervention-name {
         font-size: 14px !important;
         font-weight: 700 !important;
-        color: #FFFFFF !important;
+        color: var(--text-primary) !important;
         line-height: 1.35 !important;
         margin-bottom: 10px !important;
         min-height: 38px;
     }
     .hypo-statement-box {
-        background: #090D14;
+        background: var(--bg-main);
         border: 1px solid rgba(255, 255, 255, 0.06);
         border-radius: 8px;
         padding: 10px 12px;
@@ -417,7 +436,7 @@ st.markdown("""
     }
     .hypo-statement-if {
         font-size: 12px;
-        color: #CBD5E1;
+        color: var(--text-secondary);
         line-height: 1.45;
         margin-bottom: 6px;
     }
@@ -434,8 +453,8 @@ st.markdown("""
     }
     .hypo-chip-row {
         font-size: 11.5px;
-        color: #94A3B8;
-        background: #090D14;
+        color: var(--text-muted);
+        background: var(--bg-main);
         border: 1px solid rgba(255, 255, 255, 0.06);
         border-radius: 6px;
         padding: 4px 8px;
@@ -454,25 +473,25 @@ st.markdown("""
         padding-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.06);
         font-size: 11.5px;
-        color: #94A3B8;
+        color: var(--text-muted);
     }
     .hypo-score-green {
-        color: #10B981;
+        color: var(--success);
         font-weight: 800;
         font-size: 13.5px;
     }
 
     /* Opportunity Cards (View 2) */
     .saas-opportunity-card {
-        background: #0F1626;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 12px;
         padding: 20px 22px;
         margin-bottom: 18px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
     .nykaa-badge {
-        background: #FF2A85;
+        background: var(--primary);
         color: #FFFFFF !important;
         padding: 3px 10px;
         border-radius: 6px;
@@ -485,25 +504,25 @@ st.markdown("""
         font-family: 'JetBrains Mono', monospace !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        color: #38BDF8 !important;
+        color: var(--secondary) !important;
         background-color: #1E293B !important;
         padding: 2px 6px !important;
         border-radius: 4px !important;
     }
     .citation-box {
-        background-color: #090D14;
+        background-color: var(--bg-main);
         border: 1px dashed rgba(255, 255, 255, 0.12);
         border-radius: 8px;
         padding: 12px 16px;
         margin-top: 8px;
         font-size: 13px !important;
         line-height: 1.55 !important;
-        color: #CBD5E1 !important;
+        color: var(--text-secondary) !important;
     }
 
     /* Ask Discovery Engine / Copilot Response Card */
     .saas-answer-container {
-        background: #0F1626;
+        background: var(--bg-surface);
         border: 1px solid rgba(255, 42, 133, 0.35);
         border-radius: 12px;
         padding: 22px 24px;
@@ -554,7 +573,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar Data Update Status (Above Navigation)
+# Sidebar Data Update Status
 update_meta = dash_service.get_data_update_monday()
 st.sidebar.markdown(f"""
 <div style="background: #121826; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
@@ -568,11 +587,12 @@ st.sidebar.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar Navigation with State Key
+# Grouped Sidebar Navigation
 if "nav_choice" not in st.session_state:
     st.session_state["nav_choice"] = "📊 Overview & Executive Summary"
 
-st.sidebar.markdown("<div style='font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #64748B; margin-bottom: 8px;'>Navigation</div>", unsafe_allow_html=True)
+st.sidebar.markdown("<div style='font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #64748B; margin-bottom: 8px;'>MAIN</div>", unsafe_allow_html=True)
+
 nav_selection = st.sidebar.radio(
     "Select Interface View",
     [
@@ -1193,7 +1213,7 @@ elif nav_selection == "💬 Ask Discovery Engine":
                     </div>
                     """
 
-                # 1. Grounded Synthesized Answer Display Card
+                # Grounded Synthesized Answer Display Card
                 formatted_answer = re.sub(r'\*\*(.+?)\*\*', r'<strong style="color: #FFFFFF; font-weight: 700;">\1</strong>', sec['grounded_answer'])
                 paragraphs = formatted_answer.split("\n\n")
                 paragraphs_html = "".join([f'<p style="margin-top: 0; margin-bottom: 14px; font-size: 15px !important; font-weight: 400; color: #F8FAFC !important; line-height: 1.75;">{p.strip()}</p>' for p in paragraphs if p.strip()])
@@ -1206,5 +1226,3 @@ elif nav_selection == "💬 Ask Discovery Engine":
                 </div>
                 """
                 st.html(answer_card_html)
-
-
