@@ -1306,15 +1306,7 @@ elif nav_selection == "💬 Ask Discovery Engine":
                     </div>
                     """
 
-                # Grounded Synthesized Answer Live Streaming Display
-                st.markdown("""
-                <div style="background: var(--bg-surface); border: 1px solid rgba(255, 42, 133, 0.35); border-radius: 12px; padding: 18px 22px; margin-top: 18px; margin-bottom: 12px; box-shadow: 0 8px 32px rgba(255, 42, 133, 0.08);">
-                    <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #FF2A85; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #FF2A85; box-shadow: 0 0 8px #FF2A85;"></span>
-                        SYNTHESIZED GROUNDED PM RESEARCH INTELLIGENCE
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
 
                 paragraphs = [p.strip() for p in sec['grounded_answer'].split("\n\n") if p.strip()]
                 for p in paragraphs:
