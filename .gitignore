@@ -1,0 +1,31 @@
+# Environments & Secrets
+.env
+*.env
+!.env.example
+
+# Node modules & build artifacts
+node_modules/
+*/node_modules/
+dist/
+build/
+.next/
+
+# Python Caches & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local data / checkpoints / vector indexes
+data/vector_index.bin
+data/*.onnx
+data/embeddings/
+
+# System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,63 @@
+# ==========================================================
+# Nykaa Fashion - AI Wishlist Discovery Engine
+# Source Registry (Phase 0 Seed)
+# Scope: 'nykaa' | 'broader_fashion'
+# Collection Mode: 'automated' | 'manual_unavailable'
+# ==========================================================
+
+sources:
+  - source_id: "src_playstore_nykaa"
+    name: "Google Play Store Reviews"
+    platform: "Google Play Store"
+    source_type: "app_reviews"
+    source_scope: "nykaa"
+    collection_mode: "automated"
+    description: "Public user reviews for Nykaa Fashion Android application."
+
+  - source_id: "src_appstore_nykaa"
+    name: "Apple App Store Reviews"
+    platform: "Apple App Store"
+    source_type: "app_reviews"
+    source_scope: "nykaa"
+    collection_mode: "automated"
+    description: "Public user reviews for Nykaa Fashion iOS application."
+
+  - source_id: "src_reddit_ifa"
+    name: "Reddit r/IndianFashionAddicts"
+    platform: "Reddit"
+    source_type: "community_discussion"
+    source_scope: "broader_fashion"
+    collection_mode: "automated"
+    description: "Public fashion enthusiast discussions on sizing, fabric quality, and wishlist hesitations across Indian e-commerce."
+
+  - source_id: "src_reddit_twoxindia"
+    name: "Reddit r/TwoXIndia Shopping & Fashion"
+    platform: "Reddit"
+    source_type: "community_discussion"
+    source_scope: "broader_fashion"
+    collection_mode: "automated"
+    description: "Public peer discussions on sizing confidence, return experiences, and online fashion shopping."
+
+  - source_id: "src_youtube_reviews"
+    name: "YouTube Fashion Hauls & Try-On Reviews"
+    platform: "YouTube"
+    source_type: "video_comments"
+    source_scope: "nykaa"
+    collection_mode: "manual_unavailable"
+    description: "Public comment discussions on video try-on hauls and product vs reality feedback."
+
+  - source_id: "src_social_x"
+    name: "Social Media Mentions & Feedback"
+    platform: "X / Twitter"
+    source_type: "social_post"
+    source_scope: "nykaa"
+    collection_mode: "manual_unavailable"
+    description: "Public customer tweets regarding app experience, delivery, and sizing."
+
+  - source_id: "src_fashion_qa"
+    name: "E-Commerce Product Q&A and Community Threads"
+    platform: "Fashion Forums"
+    source_type: "qa_forum"
+    source_scope: "broader_fashion"
+    collection_mode: "manual_unavailable"
+    description: "Questions asked prior to purchasing fashion products online regarding fit and fabric."
