@@ -114,19 +114,56 @@ st.markdown("""
         margin-bottom: 0.2rem !important;
         line-height: 1.4 !important;
     }
-    [data-testid="stHeaderActionElements"], [data-testid="stToolbar"] {
+    /* Streamlit Toolbar & Actions */
+    [data-testid="stToolbar"] {
         display: none !important;
     }
 
-    /* Modern Narrow Left Sidebar */
+    /* Sidebar Expand & Collapse Control Buttons */
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stSidebarCollapseButton"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 999999 !important;
+    }
+    [data-testid="stSidebarCollapsedControl"] {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+    }
+    [data-testid="stSidebarCollapsedControl"] button,
+    [data-testid="stSidebarCollapseButton"] button,
+    button[data-testid="stBaseButton-header"],
+    button[data-testid="stBaseButton-headerNoPadding"] {
+        background-color: #121826 !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        color: #FFFFFF !important;
+        border-radius: 8px !important;
+        padding: 6px 10px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    }
+    [data-testid="stSidebarCollapsedControl"] button:hover,
+    [data-testid="stSidebarCollapseButton"] button:hover,
+    button[data-testid="stBaseButton-header"]:hover,
+    button[data-testid="stBaseButton-headerNoPadding"]:hover {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: #FFFFFF !important;
+    }
+
+    /* Modern Narrow Left Sidebar - Only Apply Fixed Width When Expanded */
     section[data-testid="stSidebar"] {
         background-color: var(--bg-sidebar) !important;
         border-right: 1px solid var(--border-subtle) !important;
+    }
+    section[data-testid="stSidebar"][aria-expanded="true"] {
         width: 270px !important;
         min-width: 270px !important;
-        max-width: 270px !important;
     }
-    section[data-testid="stSidebar"] > div:first-child {
+    section[data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
         width: 270px !important;
         padding: 1.25rem 1rem !important;
     }
