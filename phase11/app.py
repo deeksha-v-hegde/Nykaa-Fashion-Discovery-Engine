@@ -118,44 +118,117 @@ st.markdown("""
     [data-testid="stToolbar"] {
         display: none !important;
     }
+    
+    /* Header Container - Fixed & High Z-Index */
+    header,
     header[data-testid="stHeader"] {
         background-color: transparent !important;
-        z-index: 99999 !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 50px !important;
+        z-index: 999999 !important;
+        pointer-events: none !important;
     }
 
-    /* Sidebar Expand & Collapse Control Buttons (Always Prominent) */
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapseButton"],
+    /* Top Right Action Elements - Position to Right, NOT over left button */
     [data-testid="stHeaderActionElements"] {
+        position: fixed !important;
+        top: 12px !important;
+        right: 16px !important;
+        left: auto !important;
+        z-index: 9999999 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Sidebar Expand Button Wrapper (When Sidebar is Collapsed) */
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="collapsedControl"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 99999999 !important;
+        position: fixed !important;
+        top: 12px !important;
+        left: 14px !important;
+        background-color: #161F30 !important;
+        border: 1.5px solid #FF2A85 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 16px rgba(255, 42, 133, 0.4), 0 0 10px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    /* Sidebar Collapse Button Wrapper (When Sidebar is Expanded) */
+    [data-testid="stSidebarCollapseButton"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 99999999 !important;
+    }
+
+    /* ALL Collapse & Expand Button Inner Selectors */
+    header button,
+    [data-testid="stSidebarCollapsedControl"] button,
+    [data-testid="stSidebarCollapseButton"] button,
+    [data-testid="collapsedControl"] button,
+    button[aria-label="Collapse sidebar"],
+    button[aria-label="Expand sidebar"],
+    button[aria-label="Open sidebar"],
+    button[aria-label="Close sidebar"],
+    button[data-testid="stBaseButton-header"],
+    button[data-testid="stBaseButton-headerNoPadding"],
+    button[data-testid="stHeaderIconButton"] {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background-color: #161F30 !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        color: #FFFFFF !important;
+        border-radius: 8px !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        padding: 4px 8px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Explicit SVG Icon styling so arrow icons (>>) are ALWAYS bright white and visible */
+    [data-testid="stSidebarCollapsedControl"] svg,
+    [data-testid="stSidebarCollapseButton"] svg,
+    [data-testid="collapsedControl"] svg,
+    header button svg,
+    button[aria-label="Collapse sidebar"] svg,
+    button[aria-label="Expand sidebar"] svg {
+        fill: #FFFFFF !important;
+        stroke: #FFFFFF !important;
+        color: #FFFFFF !important;
+        width: 20px !important;
+        height: 20px !important;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
-        z-index: 999999 !important;
     }
-    [data-testid="stSidebarCollapsedControl"] button,
-    [data-testid="stSidebarCollapseButton"] button,
-    button[aria-label="Collapse sidebar"],
-    button[aria-label="Expand sidebar"],
-    button[data-testid="stBaseButton-header"],
-    button[data-testid="stBaseButton-headerNoPadding"] {
-        background-color: #121826 !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        color: #FFFFFF !important;
-        border-radius: 8px !important;
-        padding: 6px 10px !important;
-        cursor: pointer !important;
-        transition: all 0.2s ease !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
-    }
+
+    header button:hover,
+    [data-testid="stSidebarCollapsedControl"]:hover button,
     [data-testid="stSidebarCollapsedControl"] button:hover,
     [data-testid="stSidebarCollapseButton"] button:hover,
+    [data-testid="collapsedControl"] button:hover,
     button[aria-label="Collapse sidebar"]:hover,
     button[aria-label="Expand sidebar"]:hover,
-    button[data-testid="stBaseButton-header"]:hover,
-    button[data-testid="stBaseButton-headerNoPadding"]:hover {
+    button[aria-label="Open sidebar"]:hover,
+    button[aria-label="Close sidebar"]:hover {
         background-color: var(--primary) !important;
         border-color: var(--primary) !important;
         color: #FFFFFF !important;
+        transform: scale(1.08) !important;
+        box-shadow: 0 0 15px rgba(255, 42, 133, 0.7) !important;
     }
 
     /* Modern Left Sidebar Styling */
