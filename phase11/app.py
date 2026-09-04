@@ -114,39 +114,43 @@ st.markdown("""
         margin-bottom: 0.2rem !important;
         line-height: 1.4 !important;
     }
-    /* Streamlit Toolbar & Actions */
+    /* Streamlit Toolbar & Header Reset */
     [data-testid="stToolbar"] {
         display: none !important;
     }
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
+        z-index: 99999 !important;
+    }
 
-    /* Sidebar Expand & Collapse Control Buttons */
+    /* Sidebar Expand & Collapse Control Buttons (Always Prominent) */
     [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapseButton"] {
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="stHeaderActionElements"] {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         z-index: 999999 !important;
     }
-    [data-testid="stSidebarCollapsedControl"] {
-        position: fixed !important;
-        top: 12px !important;
-        left: 12px !important;
-    }
     [data-testid="stSidebarCollapsedControl"] button,
     [data-testid="stSidebarCollapseButton"] button,
+    button[aria-label="Collapse sidebar"],
+    button[aria-label="Expand sidebar"],
     button[data-testid="stBaseButton-header"],
     button[data-testid="stBaseButton-headerNoPadding"] {
         background-color: #121826 !important;
-        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
         color: #FFFFFF !important;
         border-radius: 8px !important;
         padding: 6px 10px !important;
         cursor: pointer !important;
         transition: all 0.2s ease !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
     }
     [data-testid="stSidebarCollapsedControl"] button:hover,
     [data-testid="stSidebarCollapseButton"] button:hover,
+    button[aria-label="Collapse sidebar"]:hover,
+    button[aria-label="Expand sidebar"]:hover,
     button[data-testid="stBaseButton-header"]:hover,
     button[data-testid="stBaseButton-headerNoPadding"]:hover {
         background-color: var(--primary) !important;
@@ -154,17 +158,12 @@ st.markdown("""
         color: #FFFFFF !important;
     }
 
-    /* Modern Narrow Left Sidebar - Only Apply Fixed Width When Expanded */
+    /* Modern Left Sidebar Styling */
     section[data-testid="stSidebar"] {
         background-color: var(--bg-sidebar) !important;
         border-right: 1px solid var(--border-subtle) !important;
     }
-    section[data-testid="stSidebar"][aria-expanded="true"] {
-        width: 270px !important;
-        min-width: 270px !important;
-    }
-    section[data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
-        width: 270px !important;
+    section[data-testid="stSidebar"] > div:first-child {
         padding: 1.25rem 1rem !important;
     }
 
