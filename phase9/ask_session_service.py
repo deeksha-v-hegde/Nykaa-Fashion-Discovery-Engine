@@ -45,14 +45,7 @@ class AskSessionService:
         Executes a primary or follow-up Ask query and returns 9 structured sections.
         """
         session = self.get_or_create_session(session_id)
-        if filters:
-            session.active_filters.update(filters)
-
-        filters_dict = {}
-        if session.active_filters.get("source_scope"):
-            filters_dict["source_scope"] = session.active_filters.get("source_scope")
-        if session.active_filters.get("source_type"):
-            filters_dict["source_type"] = session.active_filters.get("source_type")
+        filters_dict = filters or {}
 
         res: DiscoveryResponse = self.ask_engine.ask(
             query=query,

@@ -162,14 +162,19 @@ class AskEngine:
             top_k=k
         )
 
+        # Smart fallback: If strict filters yielded 0 results or top_score < 0.05, search un-filtered across full 2,138 corpus
+        if not search_results or (search_results and search_results[0].score < 0.05):
+            search_results = self.retriever.search(
+                query=processed_query,
+                filters={},
+                top_k=k
+            )
+
         top_score = search_results[0].score if search_results else 0.0
         retrieved_chunk_ids = [r.chunk_id for r in search_results]
 
-        # 4. Insufficient Evidence Detection (Relaxed threshold to prevent false refusals on valid research queries)
-        is_insufficient = (
-            not search_results 
-            or top_score < 0.12
-        )
+        # 4. Insufficient Evidence Detection (Only trigger if 0 results returned across entire corpus)
+        is_insufficient = (not search_results)
 
         if is_insufficient:
             latency_ms = (time.perf_counter() - start_time) * 1000
