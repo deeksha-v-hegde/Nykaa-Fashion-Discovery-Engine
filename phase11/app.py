@@ -132,6 +132,24 @@ st.markdown("""
         z-index: 999999 !important;
     }
 
+    /* Sidebar Expand Button Floating Control (When Sidebar is Collapsed) */
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarToggle"] {
+        position: fixed !important;
+        top: 10px !important;
+        left: 14px !important;
+        z-index: 99999999 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: #161F30 !important;
+        border: 1.5px solid #FF2A85 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 16px rgba(255, 42, 133, 0.4) !important;
+        padding: 2px !important;
+    }
+
     /* Streamlit Sidebar Expand & Collapse Control Buttons */
     [data-testid="stSidebarCollapseButton"] button,
     [data-testid="stSidebarCollapsedControl"] button,
@@ -170,6 +188,8 @@ st.markdown("""
         fill: #FFFFFF !important;
         stroke: #FFFFFF !important;
         color: #FFFFFF !important;
+        width: 20px !important;
+        height: 20px !important;
     }
 
     /* Modern Left Sidebar Styling */
@@ -607,7 +627,7 @@ ask_service = AskSessionService()
 
 # 1. Main Header Section (Modern Clean SaaS Header)
 st.markdown("""
-<div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 14px;">
+<div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 14px;">
     <div>
         <h1 style="font-size: 22px !important; font-weight: 800 !important; color: #FFFFFF !important; margin: 0 0 3px 0 !important; letter-spacing: -0.02em;">
             🛍️ Nykaa Fashion AI Discovery Engine
@@ -622,6 +642,27 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+# Top SaaS Navigation Bar (ALWAYS VISIBLE on Main Page)
+if "nav_choice" not in st.session_state:
+    st.session_state["nav_choice"] = "📊 Overview & Executive Summary"
+
+nav_options = [
+    "📊 Overview & Executive Summary",
+    "🎯 Prioritised Opportunity Board",
+    "💬 Ask Discovery Engine"
+]
+
+top_nav_cols = st.columns([1, 1, 1, 1])
+for idx, opt in enumerate(nav_options):
+    is_active = (st.session_state["nav_choice"] == opt)
+    btn_type = "primary" if is_active else "secondary"
+    with top_nav_cols[idx]:
+        if st.button(opt, key=f"top_nav_btn_{idx}", use_container_width=True, type=btn_type):
+            st.session_state["nav_choice"] = opt
+            st.rerun()
+
+st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
 
 # Sidebar Data Update Status
 update_meta = dash_service.get_data_update_monday()
@@ -638,18 +679,11 @@ st.sidebar.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Grouped Sidebar Navigation
-if "nav_choice" not in st.session_state:
-    st.session_state["nav_choice"] = "📊 Overview & Executive Summary"
-
-st.sidebar.markdown("<div style='font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #64748B; margin-bottom: 8px;'>MAIN</div>", unsafe_allow_html=True)
+st.sidebar.markdown("<div style='font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #64748B; margin-bottom: 8px;'>MAIN NAVIGATION</div>", unsafe_allow_html=True)
 
 nav_selection = st.sidebar.radio(
     "Select Interface View",
-    [
-        "📊 Overview & Executive Summary",
-        "🎯 Prioritised Opportunity Board",
-        "💬 Ask Discovery Engine"
-    ],
+    nav_options,
     key="nav_choice",
     label_visibility="collapsed"
 )
