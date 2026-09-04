@@ -165,11 +165,10 @@ class AskEngine:
         top_score = search_results[0].score if search_results else 0.0
         retrieved_chunk_ids = [r.chunk_id for r in search_results]
 
-        # 4. Insufficient Evidence Detection
+        # 4. Insufficient Evidence Detection (Relaxed threshold to prevent false refusals on valid research queries)
         is_insufficient = (
             not search_results 
-            or top_score < 0.28 
-            or (search_results[0].lexical_score == 0 and search_results[0].vector_score < 0.32)
+            or top_score < 0.12
         )
 
         if is_insufficient:
