@@ -262,7 +262,7 @@ class AskEngine:
                 "   - Distinguish between evidence-supported observations and hypotheses requiring validation.\n"
                 "   - Do NOT say: 'Users definitely...', 'This proves...', 'The root cause is...', or 'This causes...'.\n"
                 "   - Prefer: 'The evidence suggests...', 'Users appear to...', 'The available evidence indicates...', or 'Shoppers report...'.\n"
-                "7. If the retrieved passages do not contain evidence addressing the query directly, explicitly state that the current evidence does not directly document this scenario rather than forcing unrelated complaints.\n"
+                "7. For behavioral and segmentation queries, synthesize how user behaviors, goals, and frictions differ across behavioral stages (e.g., exploratory bookmarkers vs. high-intent occasion shoppers, fit-conscious buyers vs. delivery-sensitive shoppers) grounded in the retrieved review patterns.\n"
                 "8. Strictly separate: Evidence -> Pattern -> Inference -> Opportunity -> Metric Connection.\n"
                 "9. Do NOT claim 30-day conversion rates (always mark 30-day completion as 'unknown' due to lack of longitudinal user tracking).\n"
                 "10. Do NOT claim users abandoned wishlists unless explicitly stated in a passage.\n"
