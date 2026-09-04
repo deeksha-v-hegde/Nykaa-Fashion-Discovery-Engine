@@ -50,7 +50,7 @@ def stream_answer_words(text: str):
     words = text.split(" ")
     for i, word in enumerate(words):
         yield word + (" " if i < len(words) - 1 else "")
-        time.sleep(0.012)
+        time.sleep(0.04)
 
 
 # Centralized SaaS Design System & CSS Architecture
