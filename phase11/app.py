@@ -42,7 +42,7 @@ st.set_page_config(
     page_title="Nykaa Fashion AI Discovery Engine",
     page_icon="🛍️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 def stream_answer_words(text: str):
@@ -134,71 +134,22 @@ st.markdown("""
         z-index: 99999 !important;
     }
 
-    /* Modern Left Sidebar Styling */
-    section[data-testid="stSidebar"] {
-        background-color: var(--bg-sidebar) !important;
-        border-right: 1px solid var(--border-subtle) !important;
-        z-index: 999999 !important;
-    }
-
-    /* Sidebar Expand Button Floating Control (When Sidebar is Collapsed) */
+    /* Hide Streamlit Sidebar & Toggle Controls Completely */
+    section[data-testid="stSidebar"],
     [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stSidebarCollapseButton"],
     [data-testid="collapsedControl"],
-    [data-testid="stSidebarToggle"] {
-        position: fixed !important;
-        top: 10px !important;
-        left: 14px !important;
-        z-index: 99999999 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background-color: #161F30 !important;
-        border: 1.5px solid #FF2A85 !important;
-        border-radius: 8px !important;
-        box-shadow: 0 4px 16px rgba(255, 42, 133, 0.4) !important;
-        padding: 2px !important;
-    }
-
-    /* Streamlit Sidebar Expand & Collapse Control Buttons */
-    [data-testid="stSidebarCollapseButton"] button,
-    [data-testid="stSidebarCollapsedControl"] button,
-    [data-testid="collapsedControl"] button,
+    [data-testid="stSidebarToggle"],
     button[aria-label="Collapse sidebar"],
     button[aria-label="Expand sidebar"],
     button[aria-label="Open sidebar"],
-    button[aria-label="Close sidebar"],
-    button[data-testid="stBaseButton-header"],
-    button[data-testid="stHeaderIconButton"] {
-        background-color: #161F30 !important;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
-        color: #FFFFFF !important;
-        border-radius: 8px !important;
-        cursor: pointer !important;
-        transition: all 0.2s ease !important;
-    }
-
-    [data-testid="stSidebarCollapseButton"] button:hover,
-    [data-testid="stSidebarCollapsedControl"] button:hover,
-    [data-testid="collapsedControl"] button:hover,
-    button[aria-label="Collapse sidebar"]:hover,
-    button[aria-label="Expand sidebar"]:hover {
-        background-color: var(--primary) !important;
-        border-color: var(--primary) !important;
-        color: #FFFFFF !important;
-        box-shadow: 0 0 12px rgba(255, 42, 133, 0.6) !important;
-    }
-
-    /* SVG Icon Styling for Sidebar Buttons (>> and <<) */
-    [data-testid="stSidebarCollapseButton"] svg,
-    [data-testid="stSidebarCollapsedControl"] svg,
-    [data-testid="collapsedControl"] svg,
-    button[aria-label="Collapse sidebar"] svg,
-    button[aria-label="Expand sidebar"] svg {
-        fill: #FFFFFF !important;
-        stroke: #FFFFFF !important;
-        color: #FFFFFF !important;
-        width: 20px !important;
-        height: 20px !important;
+    button[aria-label="Close sidebar"] {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
 
     /* Modern Left Sidebar Styling */
@@ -774,6 +725,7 @@ def render_opportunity_card_ui(
 
 
 # VIEW 1: Overview & Executive Summary (Modern SaaS AI / Product Analytics Dashboard)
+nav_selection = st.session_state.get("nav_choice", "📊 Overview & Executive Summary")
 if nav_selection == "📊 Overview & Executive Summary":
     overview = dash_service.get_overview()
     stats = overview["overview_stats"]
