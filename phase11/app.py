@@ -6,6 +6,7 @@ Usage: streamlit run phase11/app.py
 
 import sys
 import re
+import time
 import importlib
 from pathlib import Path
 
@@ -43,6 +44,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+def stream_answer_words(text: str):
+    """Generates a live word-by-word streaming writing effect for PM research synthesis."""
+    words = text.split(" ")
+    for i, word in enumerate(words):
+        yield word + (" " if i < len(words) - 1 else "")
+        time.sleep(0.012)
+
 
 # Centralized SaaS Design System & CSS Architecture
 st.markdown("""
@@ -1297,16 +1306,20 @@ elif nav_selection == "💬 Ask Discovery Engine":
                     </div>
                     """
 
-                # Grounded Synthesized Answer Display Card
-                formatted_answer = re.sub(r'\*\*(.+?)\*\*', r'<strong style="color: #FFFFFF; font-weight: 700;">\1</strong>', sec['grounded_answer'])
-                paragraphs = formatted_answer.split("\n\n")
-                paragraphs_html = "".join([f'<p style="margin-top: 0; margin-bottom: 14px; font-size: 15px !important; font-weight: 400; color: #F8FAFC !important; line-height: 1.75;">{p.strip()}</p>' for p in paragraphs if p.strip()])
-                
-                answer_card_html = f"""
-                <div class="saas-answer-container">
-                    <div>
-                        {paragraphs_html}
-                    </div>{bookmark_intent_cards_html}{external_info_cards_html}
+                # Grounded Synthesized Answer Live Streaming Display
+                st.markdown("""
+                <div style="background: var(--bg-surface); border: 1px solid rgba(255, 42, 133, 0.35); border-radius: 12px; padding: 18px 22px; margin-top: 18px; margin-bottom: 12px; box-shadow: 0 8px 32px rgba(255, 42, 133, 0.08);">
+                    <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #FF2A85; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #FF2A85; box-shadow: 0 0 8px #FF2A85;"></span>
+                        SYNTHESIZED GROUNDED PM RESEARCH INTELLIGENCE
+                    </div>
                 </div>
-                """
-                st.html(answer_card_html)
+                """, unsafe_allow_html=True)
+
+                paragraphs = [p.strip() for p in sec['grounded_answer'].split("\n\n") if p.strip()]
+                for p in paragraphs:
+                    st.write_stream(stream_answer_words(p))
+                    st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
+
+                if bookmark_intent_cards_html or external_info_cards_html:
+                    st.html(f"{bookmark_intent_cards_html}{external_info_cards_html}")
