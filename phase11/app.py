@@ -585,8 +585,11 @@ st.markdown("""
 dash_service = DashboardService()
 ask_service = AskSessionService()
 
+# Data Update Status (Monday Date)
+update_meta = dash_service.get_data_update_monday()
+
 # 1. Main Header Section (Modern Clean SaaS Header)
-st.markdown("""
+st.markdown(f"""
 <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 14px;">
     <div>
         <h1 style="font-size: 22px !important; font-weight: 800 !important; color: #FFFFFF !important; margin: 0 0 3px 0 !important; letter-spacing: -0.02em;">
@@ -596,9 +599,17 @@ st.markdown("""
             Evidence-Grounded Research Intelligence for Wishlist Reconsideration & Conversion
         </p>
     </div>
-    <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
-        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #10B981; box-shadow: 0 0 8px #10B981;"></span>
-        <span style="font-size: 12px; font-weight: 600; color: #10B981;">Live Production Build</span>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 4px 14px; display: flex; align-items: center; gap: 7px;">
+            <span style="font-size: 13px;">📅</span>
+            <span style="font-size: 12px; font-weight: 600; color: #CBD5E1;">
+                <span style="color: #94A3B8;">Data Updated:</span> <span style="color: #38BDF8;">{update_meta['display_text']}</span>
+            </span>
+        </div>
+        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+            <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #10B981; box-shadow: 0 0 8px #10B981;"></span>
+            <span style="font-size: 12px; font-weight: 600; color: #10B981;">Live Production Build</span>
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -625,12 +636,11 @@ for idx, opt in enumerate(nav_options):
 st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
 
 # Sidebar Data Update Status
-update_meta = dash_service.get_data_update_monday()
 st.sidebar.markdown(f"""
 <div style="background: #121826; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
     <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #94A3B8; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 6px;">
-        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: #10B981;"></span>
-        Data Snapshot
+        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: #38BDF8;"></span>
+        Data Updated
     </div>
     <div style="font-size: 13.5px; font-weight: 700; color: #FFFFFF;">
         {update_meta['display_text']}
