@@ -26,7 +26,7 @@ This project ingests and structures public user-generated content (UGC) to surfa
 * **Public UGC Ingestion**: Collects unstructured reviews and open discussions from the Google Play Store, Apple App Store, and Reddit fashion communities.
 * **Cleaning & Hinglish Normalization**: Filters noise, deduplicates text, and standardizes Hinglish expressions into an analysed canonical corpus ($N=1,151$).
 * **Semantic & Vector Analysis**: Generates embeddings via TF-IDF and Latent Semantic Analysis (LSA) for deterministic similarity retrieval.
-* **Grounded RAG / Ask Engine**: Delivers LLM-powered synthesis (via Groq Llama 3.3 70B) strictly constrained to verbatim retrieved evidence with source citations.
+* **Grounded RAG / Ask Engine**: Delivers LLM-powered synthesis (via Groq API using `openai/gpt-oss-120b`, swappable via `GROQ_MODEL`) strictly constrained to verbatim retrieved evidence with source citations.
 * **Structured Barrier & Behaviour Extraction**: Categorizes user friction into a 13-barrier taxonomy and maps 9 distinct wishlist behaviours.
 * **Denominator-Controlled Quantification**: Computes barrier frequency against a fixed sample size ($N=1,151$) to eliminate ungrounded statistical claims.
 * **6-Factor Opportunity Prioritisation**: Automatically ranks research opportunity areas across frequency, metric relevance, pain severity, evidence density, cross-source breadth, and solvability.
@@ -107,12 +107,12 @@ $$\text{Prioritisation Score} = 0.20(\text{Freq}) + 0.25(\text{MetricRel}) + 0.2
 
 ## 🛠️ Tech Stack
 
-* **Web Application**: Streamlit
+* **Web Application**: Streamlit (interactive PM Discovery Dashboard) & FastAPI (API services)
 * **Language & Runtime**: Python 3.11+
-* **LLM Inference**: Groq API (`llama-3.3-70b-versatile`)
-* **Information Retrieval**: Scikit-Learn (Sublinear TF-IDF, TruncatedSVD / LSA), NumPy
+* **LLM Inference**: Groq API (`openai/gpt-oss-120b` active; swappable via `GROQ_MODEL` e.g., `llama-3.3-70b-versatile`)
+* **Information Retrieval & Embeddings**: Scikit-Learn (Sublinear TF-IDF, TruncatedSVD / 384-dim LSA), NumPy
 * **Storage & Indexing**: SQLite (`discovery_engine.db`), Joblib
-* **Data Scraping & Ingestion**: HTTPX, Google Play Scraper
+* **Data Scraping & Ingestion**: HTTPX, Google Play Scraper (`google-play-scraper`)
 * **Data Contracts & Schemas**: Pydantic v2, Pydantic-Settings
 
 ---
